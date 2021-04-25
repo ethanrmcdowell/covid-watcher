@@ -1,45 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 import Header from './components/Header';
 import FrontPageData from './components/FrontPageData';
-import CurrentDate from './components/CurrentDate';
+import SearchPage from './components/SearchPage';
+import AboutPage from './components/AboutPage';
 import './style.css';
-import axios from 'axios';
 
 function App() {
-  const [covidStats, setCovidStats] = useState([]);
-  useEffect(() => {
-    const options = {
-      method: 'GET',
-      url: 'https://coronavirus-smartable.p.rapidapi.com/stats/v1/US/',
-      headers: {
-        'x-rapidapi-key': '640d573e98msh95e98b5515eb63ap1da078jsn5ce852b9cb8a',
-        'x-rapidapi-host': 'coronavirus-smartable.p.rapidapi.com',
-      },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        setCovidStats(response.data.stats);
-        return response.data.stats;
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  }, []);
   return (
-    <div>
+    <Router>
       <Header />
-      <div className='dataContainer'>
-        <CurrentDate />
-        <FrontPageData
-          newCases={covidStats.newlyConfirmedCases}
-          newDeaths={covidStats.newDeaths}
-          totalCases={covidStats.totalConfirmedCases}
-          totalDeaths={covidStats.totalDeaths}
-        />
-      </div>
-    </div>
+      <Switch>
+        <Route exact path='/' component={FrontPageData} />
+        <Route exact path='/search' component={SearchPage} />
+        <Route exact path='/about' component={AboutPage} />
+      </Switch>
+    </Router>
   );
 }
 
