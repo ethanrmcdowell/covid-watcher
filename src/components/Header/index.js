@@ -8,7 +8,7 @@ const Header = () => {
     <Navbar bg='light' variant='light'>
       <Navbar.Brand>COVID.WATCHER</Navbar.Brand>
       <Nav className='mr-auto'>
-        <Nav.Link href='/'>Home</Nav.Link>
+        <Nav.Link href='/covid-watcher'>Home</Nav.Link>
         <Nav.Link href='/search'>Search</Nav.Link>
         <Nav.Link href='/about'>About</Nav.Link>
       </Nav>

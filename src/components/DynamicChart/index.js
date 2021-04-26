@@ -1,18 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 
-const DynamicChart = () => {
+const DynamicChart = props => {
   const [chartData, setChartData] = useState({});
-  const [employeeSalary, setEmployeeSalary] = useState([]);
-  const [employeeAge, setEmployeeAge] = useState([]);
+
+  function handleLabels(j) {
+    const covidList = [];
+    for (let i = 1; i < 7; i++) {
+      covidList.push(props.covidStats[props.covidStats.length - i].date);
+    }
+    return covidList[j];
+  }
+
+  function handleData(j) {
+    const dataList = [];
+    for (let i = 1; i < 9; i++) {
+      let todayTotalDeaths =
+        props.covidStats[props.covidStats.length - i].deaths;
+      let yesterdayTotalDeaths =
+        props.covidStats[props.covidStats.length - i - 1].deaths;
+      let todayDeaths = todayTotalDeaths - yesterdayTotalDeaths;
+      dataList.push(todayDeaths);
+    }
+    console.log(dataList);
+    return dataList[j];
+  }
 
   const Chart = () => {
     setChartData({
-      labels: ['22/03', '23/03', '24/03', '25/03', '26/03', '27/03'],
+      labels: [
+        handleLabels(6).slice(0, 10),
+        handleLabels(5).slice(0, 10),
+        handleLabels(4).slice(0, 10),
+        handleLabels(3).slice(0, 10),
+        handleLabels(2).slice(0, 10),
+        handleLabels(1).slice(0, 10),
+        handleLabels(0).slice(0, 10),
+      ],
       datasets: [
         {
-          label: '# of Votes',
-          data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          label: 'Deaths',
+          data: [
+            handleData(6),
+            handleData(5),
+            handleData(4),
+            handleData(3),
+            handleData(2),
+            handleData(1),
+            handleData(0),
+          ],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -37,9 +73,8 @@ const DynamicChart = () => {
   useEffect(() => {
     Chart();
   }, []);
-
   return (
-    <div className='App'>
+    <div>
       <h1>Bar Chart</h1>
       <div>
         <Bar
@@ -48,13 +83,10 @@ const DynamicChart = () => {
             responsive: true,
             title: { text: 'THICCNESS SCALE', display: true },
             scales: {
-              yAxes: [
-                {
-                  ticks: {
-                    beginAtZero: true,
-                  },
-                },
-              ],
+              y: {
+                grace: '0.5%',
+                beginAtZero: false,
+              },
             },
           }}
         />
@@ -64,3 +96,11 @@ const DynamicChart = () => {
 };
 
 export default DynamicChart;
+
+// props.covidStats.history[394].date.slice(0, 10),
+// props.covidStats.history[395].date.slice(0, 10),
+// props.covidStats.history[396].date.slice(0, 10),
+// props.covidStats.history[397].date.slice(0, 10),
+// props.covidStats.history[398].date.slice(0, 10),
+// props.covidStats.history[399].date.slice(0, 10),
+// props.covidStats.history[400].date.slice(0, 10),

@@ -12,7 +12,7 @@ function App() {
     <Router>
       <Header />
       <Switch>
-        <Route exact path='/' component={FrontPageData} />
+        <Route exact path='/covid-watcher' component={FrontPageData} />
         <Route exact path='/search' component={SearchPage} />
         <Route exact path='/about' component={AboutPage} />
       </Switch>

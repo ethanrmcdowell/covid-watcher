@@ -6,6 +6,7 @@ import './style.css';
 
 const FrontPageData = props => {
   const [covidStats, setCovidStats] = useState([]);
+  const [covidData, setCovidData] = useState([]);
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -20,8 +21,8 @@ const FrontPageData = props => {
       .request(options)
       .then(function (response) {
         setCovidStats(response.data.stats);
-        console.log(response.data.stats);
-        return response.data.stats;
+        setCovidData(response.data.stats.history);
+        console.log(covidData[covidData.length - 1]);
       })
       .catch(function (error) {
         console.error(error);
@@ -38,9 +39,7 @@ const FrontPageData = props => {
         Total Confirmed Cases: {covidStats.totalConfirmedCases}
       </h2>
       <h2 className='title'>Total Deaths: {covidStats.totalDeaths}</h2>
-      <div>
-        <DynamicChart />
-      </div>
+      <div>{/* <DynamicChart covidStats={covidData} /> */}</div>
     </div>
   );
 };
