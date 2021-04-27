@@ -7,6 +7,8 @@ import './style.css';
 const FrontPageData = props => {
   const [covidStats, setCovidStats] = useState([]);
   const [covidData, setCovidData] = useState([]);
+  const [mostRecentDate, setMostRecentDate] = useState();
+  const [stateData, setStateData] = useState([]);
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -21,8 +23,12 @@ const FrontPageData = props => {
       .request(options)
       .then(function (response) {
         setCovidStats(response.data.stats);
-        setCovidData(response.data.stats.history);
-        console.log(covidData[covidData.length - 1]);
+        // setCovidData(response.data.stats.history);
+        // setMostRecentDate(
+        //   covidStats.history[covidData.length - 1].date.slice(0, 10)
+        // );
+        // console.log(covidData[covidData.length - 1]);
+        console.log(response);
       })
       .catch(function (error) {
         console.error(error);
@@ -30,7 +36,9 @@ const FrontPageData = props => {
   }, []);
   return (
     <div className='dataContainer'>
-      <CurrentDate />
+      <h2>Data goes here.</h2>
+      {/* {<CurrentDate />}
+      <h1 className='titleDate'>{mostRecentDate}</h1>
       <h2 className='title'>
         Newly Confirmed Cases: {covidStats.newlyConfirmedCases}
       </h2>
@@ -39,7 +47,7 @@ const FrontPageData = props => {
         Total Confirmed Cases: {covidStats.totalConfirmedCases}
       </h2>
       <h2 className='title'>Total Deaths: {covidStats.totalDeaths}</h2>
-      <div>{/* <DynamicChart covidStats={covidData} /> */}</div>
+      <div><DynamicChart covidStats={covidData} /></div> */}
     </div>
   );
 };

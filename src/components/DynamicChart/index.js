@@ -72,7 +72,7 @@ const DynamicChart = props => {
   };
   useEffect(() => {
     Chart();
-  }, []);
+  }, [chartData]);
   return (
     <div>
       <h1>Bar Chart</h1>
