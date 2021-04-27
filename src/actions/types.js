@@ -1,0 +1,2 @@
+export const SHOW_DAILY_DATA = 'SHOW_DAILY_DATA';
+export const ADD_FETCHED_DATA = 'ADD_FETCHED_DATA';
