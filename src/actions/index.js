@@ -1,31 +1,41 @@
 import axios from 'axios';
 
-import { ADD_FETCHED_DATA, SHOW_DAILY_DATA } from './types';
+import { ADD_FETCHED_DATA, ADD_HISTORICAL_DATA } from './types';
 
 const apiUrl =
-  'https://corona.lmao.ninja/v2/countries/usa?yesterday=true&strict=true&query';
+  'https://disease.sh/v3/covid-19/countries/usa?yesterday=false&twoDaysAgo=false&strict=true&allowNull=false';
 
-export const showData = data => {
-  return {
-    type: SHOW_DAILY_DATA,
-    payload: {
-      newDeaths: data.todayDeaths,
-      newCases: data.todayCases,
-    },
-  };
-};
+const apiUrlTwo = 'https://disease.sh/v3/covid-19/historical/usa?lastdays=16';
 
 export const fetchData = () => {
   return dispatch => {
+    return (
+      axios
+        .get(apiUrl)
+        // .then(response => {
+        //   return response.data;
+        // })
+        .then(response => {
+          dispatch({
+            type: ADD_FETCHED_DATA,
+            payload: response.data,
+          });
+        })
+        .catch(error => {
+          throw error;
+        })
+    );
+  };
+};
+
+export const fetchDataTwo = () => {
+  return dispatch => {
     return axios
-      .get(apiUrl)
+      .get(apiUrlTwo)
       .then(response => {
-        return response.data;
-      })
-      .then(data => {
         dispatch({
-          type: ADD_FETCHED_DATA,
-          payload: data,
+          type: ADD_HISTORICAL_DATA,
+          payload: response,
         });
       })
       .catch(error => {

@@ -1,83 +1,50 @@
 import React, { useState, useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { useSelector } from 'react-redux';
+import { Line } from 'react-chartjs-2';
 
-const DynamicChart = props => {
+const DynamicChart = () => {
   const [chartData, setChartData] = useState({});
+  const covidData = useSelector(state => state.data[1]);
+  const deathsObj = covidData.data.timeline.deaths;
+  const deathArray = Object.values(deathsObj);
+  const deathDates = Object.keys(deathsObj);
+  console.log(deathDates);
+  console.log(deathArray);
+  // const dailyDeathArray = [];
 
-  function handleLabels(j) {
-    const covidList = [];
-    for (let i = 1; i < 7; i++) {
-      covidList.push(props.covidStats[props.covidStats.length - i].date);
-    }
-    return covidList[j];
-  }
-
-  function handleData(j) {
-    const dataList = [];
-    for (let i = 1; i < 9; i++) {
-      let todayTotalDeaths =
-        props.covidStats[props.covidStats.length - i].deaths;
-      let yesterdayTotalDeaths =
-        props.covidStats[props.covidStats.length - i - 1].deaths;
-      let todayDeaths = todayTotalDeaths - yesterdayTotalDeaths;
-      dataList.push(todayDeaths);
-    }
-    console.log(dataList);
-    return dataList[j];
-  }
+  // for (let i = 1; i > 17; i++) {
+  //   let thisDayDeaths = deathArray[i] - deathArray[i - 1];
+  //   dailyDeathArray.push(thisDayDeaths);
+  // }
 
   const Chart = () => {
     setChartData({
-      labels: [
-        handleLabels(6).slice(0, 10),
-        handleLabels(5).slice(0, 10),
-        handleLabels(4).slice(0, 10),
-        handleLabels(3).slice(0, 10),
-        handleLabels(2).slice(0, 10),
-        handleLabels(1).slice(0, 10),
-        handleLabels(0).slice(0, 10),
-      ],
+      labels: deathDates,
       datasets: [
         {
           label: 'Deaths',
-          data: [
-            handleData(6),
-            handleData(5),
-            handleData(4),
-            handleData(3),
-            handleData(2),
-            handleData(1),
-            handleData(0),
-          ],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)',
-          ],
-          borderWidth: 1,
+          data: deathArray,
+          borderColor: 'red',
+          backgroundColor: 'red',
+          borderWidth: 1.5,
         },
       ],
     });
   };
   useEffect(() => {
+    const dailyDeathArray = [];
+    for (let i = 1; i > 17; i++) {
+      let thisDayDeaths = deathArray[i] - deathArray[i - 1];
+      dailyDeathArray.push(thisDayDeaths);
+    }
+    console.log(dailyDeathArray);
     Chart();
-  }, [chartData]);
+  }, []);
   return (
     <div>
       <h1>Bar Chart</h1>
       <div>
-        <Bar
+        <Line
           data={chartData}
           options={{
             responsive: true,
@@ -96,11 +63,3 @@ const DynamicChart = props => {
 };
 
 export default DynamicChart;
-
-// props.covidStats.history[394].date.slice(0, 10),
-// props.covidStats.history[395].date.slice(0, 10),
-// props.covidStats.history[396].date.slice(0, 10),
-// props.covidStats.history[397].date.slice(0, 10),
-// props.covidStats.history[398].date.slice(0, 10),
-// props.covidStats.history[399].date.slice(0, 10),
-// props.covidStats.history[400].date.slice(0, 10),

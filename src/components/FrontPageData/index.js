@@ -1,19 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { showData } from '../../actions';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import CurrentDate from '../CurrentDate';
 import DynamicChart from '../DynamicChart';
 import './style.css';
 
 const FrontPageData = props => {
-  const someData = useSelector(state => state);
-  console.log(someData);
-  return (
-    <div>
-      <CurrentDate />
-    </div>
-  );
+  const covidData = useSelector(state => state.data[0]);
+  if (!covidData) {
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    );
+  } else {
+    return (
+      <div className='dataContainer'>
+        <CurrentDate />
+        <h1 className='countryHeader'>United States:</h1>
+        <h2>
+          Total Deaths:{' '}
+          {covidData.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+        </h2>
+        <h2>
+          Today Deaths:{' '}
+          {covidData.todayDeaths
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+        </h2>
+        <h2>
+          Total Active Cases:{' '}
+          {covidData.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+        </h2>
+        <div>
+          <DynamicChart />
+        </div>
+      </div>
+    );
+  }
 };
 
 export default FrontPageData;
