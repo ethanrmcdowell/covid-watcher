@@ -19,7 +19,7 @@ function App() {
       <Switch>
         <Route
           exact
-          path='/'
+          path='/covid-watcher'
           render={props => (
             <FrontPageData
               covidData={covidData}
@@ -30,12 +30,12 @@ function App() {
         />
         <Route
           exact
-          path='/search'
+          path='/covid-watcher/state'
           render={props => <StatePage stateData={stateData} />}
         />
         {/* <Route exact path='/' component={FrontPageData} /> */}
         {/* <Route exact path='/search' component={StatePage} /> */}
-        <Route exact path='/about' component={AboutPage} />
+        <Route exact path='/covid-watcher/about' component={AboutPage} />
       </Switch>
     </Router>
   );
