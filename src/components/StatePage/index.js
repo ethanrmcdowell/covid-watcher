@@ -28,7 +28,6 @@ const StatePage = props => {
     return (
       <div>
         <div className='dropdownContainer'>
-          <h2 className='titleText'>View current data by state:</h2>
           <Dropdown>
             <Dropdown.Toggle variant='secondary' id='dropdown-basic'>
               Select State / Territory
@@ -55,7 +54,6 @@ const StatePage = props => {
     return (
       <div>
         <div className='dropdownContainer'>
-          <h2>View current data by state:</h2>
           <Dropdown>
             <Dropdown.Toggle variant='secondary' id='dropdown-basic'>
               Select a State
@@ -76,7 +74,6 @@ const StatePage = props => {
             </Dropdown.Menu>
           </Dropdown>
         </div>
-        <CurrentDate />
         <StateDisplay
           stateName={selectedStateData.state}
           deathsToday={selectedStateData.todayDeaths}

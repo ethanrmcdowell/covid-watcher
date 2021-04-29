@@ -14,31 +14,39 @@ function App() {
   const stateData = useSelector(state => state.data[2]);
 
   return (
-    <Router>
+    <div>
       <Header />
-      <Switch>
-        <Route
-          exact
-          path='/covid-watcher'
-          render={props => (
-            <FrontPageData
-              covidData={covidData}
-              deathData={deathData}
-              stateData={stateData}
-            />
-          )}
-        />
-        <Route
-          exact
-          path='/covid-watcher/state'
-          render={props => <StatePage stateData={stateData} />}
-        />
-        {/* <Route exact path='/' component={FrontPageData} /> */}
-        {/* <Route exact path='/search' component={StatePage} /> */}
-        <Route exact path='/covid-watcher/about' component={AboutPage} />
-      </Switch>
-    </Router>
+      <FrontPageData covidData={covidData} deathData={deathData} />
+      <StatePage stateData={stateData} />
+    </div>
   );
+
+  // return (
+  //   <Router>
+  //     <Header />
+  //     <Switch>
+  //       <Route
+  //         exact
+  //         path='/covid-watcher'
+  //         render={props => (
+  //           <FrontPageData
+  //             covidData={covidData}
+  //             deathData={deathData}
+  //             stateData={stateData}
+  //           />
+  //         )}
+  //       />
+  //       <Route
+  //         exact
+  //         path='/covid-watcher/state'
+  //         render={props => <StatePage stateData={stateData} />}
+  //       />
+  //       {/* <Route exact path='/' component={FrontPageData} /> */}
+  //       {/* <Route exact path='/search' component={StatePage} /> */}
+  //       <Route exact path='/covid-watcher/about' component={AboutPage} />
+  //     </Switch>
+  //   </Router>
+  // );
 }
 
 export default App;
