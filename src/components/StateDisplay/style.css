@@ -1,0 +1,6 @@
+.smallMessage {
+  position: absolute;
+  font-size: 13px !important;
+  bottom: 10px;
+  right: 15px;
+}
