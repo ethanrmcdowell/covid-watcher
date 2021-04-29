@@ -1,12 +1,12 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import CurrentDate from '../CurrentDate';
 import DynamicChart from '../DynamicChart';
 import './style.css';
 
 const FrontPageData = props => {
-  const covidData = useSelector(state => state.data[0]);
-  const deathData = useSelector(state => state.data[1]);
+  const covidData = props.covidData;
+  const deathData = props.deathData;
+
   if (!covidData || !deathData) {
     return (
       <div>
@@ -14,7 +14,6 @@ const FrontPageData = props => {
       </div>
     );
   } else {
-    console.log(deathData);
     return (
       <div>
         <CurrentDate />
