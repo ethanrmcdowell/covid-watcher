@@ -1,0 +1,12 @@
+.container {
+  font-family: 'Playfair Display', serif;
+  margin-top: 20px;
+}
+
+.chartContainer {
+  width: 90%;
+}
+
+canvas {
+  font-family: 'Playfair Display', serif !important;
+}

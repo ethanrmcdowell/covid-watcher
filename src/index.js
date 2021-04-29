@@ -16,13 +16,17 @@ const store = createStore(
 );
 
 // const store = createStore(rootReducer, applyMiddleware(thunk));
-store.dispatch(fetchData());
-store.dispatch(fetchDataTwo());
+async function getData() {
+  store.dispatch(fetchData());
+  store.dispatch(fetchDataTwo());
+}
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+getData().then(
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
 
-  document.getElementById('root')
+    document.getElementById('root')
+  )
 );

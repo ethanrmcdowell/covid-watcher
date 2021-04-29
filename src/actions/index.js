@@ -8,38 +8,34 @@ const apiUrl =
 const apiUrlTwo = 'https://disease.sh/v3/covid-19/historical/usa?lastdays=16';
 
 export const fetchData = () => {
-  return dispatch => {
-    return (
-      axios
-        .get(apiUrl)
-        // .then(response => {
-        //   return response.data;
-        // })
-        .then(response => {
-          dispatch({
-            type: ADD_FETCHED_DATA,
-            payload: response.data,
-          });
-        })
-        .catch(error => {
-          throw error;
-        })
-    );
-  };
-};
-
-export const fetchDataTwo = () => {
-  return dispatch => {
-    return axios
-      .get(apiUrlTwo)
+  return async dispatch => {
+    return await axios
+      .get(apiUrl)
+      // .then(response => {
+      //   return response.data;
+      // })
       .then(response => {
         dispatch({
-          type: ADD_HISTORICAL_DATA,
-          payload: response,
+          type: ADD_FETCHED_DATA,
+          payload: response.data,
         });
       })
       .catch(error => {
         throw error;
       });
+  };
+};
+
+export const fetchDataTwo = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(apiUrlTwo);
+      dispatch({
+        type: ADD_HISTORICAL_DATA,
+        payload: response.data,
+      });
+    } catch (error) {
+      throw error;
+    }
   };
 };

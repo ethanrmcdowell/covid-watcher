@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { Line } from 'react-chartjs-2';
+import './style.css';
 
-const DynamicChart = () => {
+const DynamicChart = props => {
   const [chartData, setChartData] = useState({});
-  const covidData = useSelector(state => state.data[1]);
-  const deathsObj = covidData.data.timeline.deaths;
+  const covidData = props.deathData;
+  console.log(covidData);
+
+  const deathsObj = covidData.timeline.deaths;
   const deathArray = Object.values(deathsObj);
   const deathDates = Object.keys(deathsObj);
-  console.log(deathDates);
-  console.log(deathArray);
-  // const dailyDeathArray = [];
-
-  // for (let i = 1; i > 17; i++) {
-  //   let thisDayDeaths = deathArray[i] - deathArray[i - 1];
-  //   dailyDeathArray.push(thisDayDeaths);
-  // }
+  const dailyDeathArray = [];
+  for (let i = 1; i < 16; i++) {
+    let dailyDeathCount = deathArray[i] - deathArray[i - 1];
+    dailyDeathArray.push(dailyDeathCount);
+  }
 
   const Chart = () => {
     setChartData({
@@ -23,7 +22,7 @@ const DynamicChart = () => {
       datasets: [
         {
           label: 'Deaths',
-          data: deathArray,
+          data: dailyDeathArray,
           borderColor: 'red',
           backgroundColor: 'red',
           borderWidth: 1.5,
@@ -32,18 +31,11 @@ const DynamicChart = () => {
     });
   };
   useEffect(() => {
-    const dailyDeathArray = [];
-    for (let i = 1; i > 17; i++) {
-      let thisDayDeaths = deathArray[i] - deathArray[i - 1];
-      dailyDeathArray.push(thisDayDeaths);
-    }
-    console.log(dailyDeathArray);
     Chart();
   }, []);
   return (
-    <div>
-      <h1>Bar Chart</h1>
-      <div>
+    <div className='container'>
+      <div className='chartContainer'>
         <Line
           data={chartData}
           options={{

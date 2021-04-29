@@ -6,33 +6,43 @@ import './style.css';
 
 const FrontPageData = props => {
   const covidData = useSelector(state => state.data[0]);
-  if (!covidData) {
+  const deathData = useSelector(state => state.data[1]);
+  if (!covidData || !deathData) {
     return (
       <div>
         <h2>Loading...</h2>
       </div>
     );
   } else {
+    console.log(deathData);
     return (
-      <div className='dataContainer'>
+      <div>
         <CurrentDate />
-        <h1 className='countryHeader'>United States:</h1>
-        <h2>
-          Total Deaths:{' '}
-          {covidData.deaths.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-        </h2>
-        <h2>
-          Today Deaths:{' '}
-          {covidData.todayDeaths
-            .toString()
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-        </h2>
-        <h2>
-          Total Active Cases:{' '}
-          {covidData.active.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-        </h2>
-        <div>
-          <DynamicChart />
+        <div className='container'>
+          <div className='dataContainer'>
+            <h1 className='countryHeader'>United States:</h1>
+            <h2>
+              Total Deaths:{' '}
+              {covidData.deaths
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            </h2>
+            <h2>
+              Today Deaths:{' '}
+              {covidData.todayDeaths
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            </h2>
+            <h2>
+              Total Active Cases:{' '}
+              {covidData.active
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            </h2>
+          </div>
+          <div className='dataContainer'>
+            <DynamicChart deathData={deathData} />
+          </div>
         </div>
       </div>
     );
