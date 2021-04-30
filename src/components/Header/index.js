@@ -1,16 +1,21 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithubSquare } from '@fortawesome/free-brands-svg-icons';
+import './style.css';
 
 const Header = () => {
   return (
-    <Navbar bg='light' variant='light'>
-      <Navbar.Brand>COVID.WATCHER</Navbar.Brand>
-      <Nav className='mr-auto'>
-        <Nav.Link href='/covid-watcher'>Home</Nav.Link>
-        <Nav.Link href='/covid-watcher/state'>States</Nav.Link>
-        <Nav.Link href='/covid-watcher/about'>About</Nav.Link>
-      </Nav>
+    <Navbar>
+      <Navbar.Brand>COVID-19 Statistics</Navbar.Brand>
+      <Navbar.Toggle />
+      <Navbar.Collapse className='justify-content-end'>
+        <Navbar.Text>
+          <a href='https://github.com/ethanrmcdowell/covid-watcher'>
+            <FontAwesomeIcon icon={faGithubSquare} size='2x' />
+          </a>
+        </Navbar.Text>
+      </Navbar.Collapse>
     </Navbar>
   );
 };

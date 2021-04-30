@@ -4,7 +4,7 @@ import './style.css';
 const StateDisplay = props => {
   return (
     <div className='dataContainer'>
-      <h2>{props.stateName} </h2>
+      <h2 className='stateName'>{props.stateName} </h2>
 
       <h2>
         Deaths Today:{' '}

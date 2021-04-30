@@ -1,11 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header';
 import FrontPageData from './components/FrontPageData';
 import StatePage from './components/StatePage';
-import AboutPage from './components/AboutPage';
 import './style.css';
 
 function App() {
@@ -28,33 +26,6 @@ function App() {
       </div>
     );
   }
-
-  // return (
-  //   <Router>
-  //     <Header />
-  //     <Switch>
-  //       <Route
-  //         exact
-  //         path='/covid-watcher'
-  //         render={props => (
-  //           <FrontPageData
-  //             covidData={covidData}
-  //             deathData={deathData}
-  //             stateData={stateData}
-  //           />
-  //         )}
-  //       />
-  //       <Route
-  //         exact
-  //         path='/covid-watcher/state'
-  //         render={props => <StatePage stateData={stateData} />}
-  //       />
-  //       {/* <Route exact path='/' component={FrontPageData} /> */}
-  //       {/* <Route exact path='/search' component={StatePage} /> */}
-  //       <Route exact path='/covid-watcher/about' component={AboutPage} />
-  //     </Switch>
-  //   </Router>
-  // );
 }
 
 export default App;

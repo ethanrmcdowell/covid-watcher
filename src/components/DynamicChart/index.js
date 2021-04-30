@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
+import { defaults } from 'react-chartjs-2';
 import './style.css';
 
 const DynamicChart = props => {
+  console.log(defaults.font.family);
+  defaults.font.family = 'Times New Roman';
   const [chartData, setChartData] = useState({});
   const covidData = props.deathData;
   console.log(covidData);
