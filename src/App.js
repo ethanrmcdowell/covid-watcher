@@ -13,13 +13,21 @@ function App() {
   const deathData = useSelector(state => state.data[1]);
   const stateData = useSelector(state => state.data[2]);
 
-  return (
-    <div>
-      <Header />
-      <FrontPageData covidData={covidData} deathData={deathData} />
-      <StatePage stateData={stateData} />
-    </div>
-  );
+  if (!covidData || !deathData || !stateData) {
+    return (
+      <div>
+        <h2>Loading...</h2>
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Header />
+        <FrontPageData covidData={covidData} deathData={deathData} />
+        <StatePage stateData={stateData} />
+      </div>
+    );
+  }
 
   // return (
   //   <Router>

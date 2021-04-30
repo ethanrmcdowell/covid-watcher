@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
-import CurrentDate from '../CurrentDate';
 import StateDisplay from '../StateDisplay';
 import './style.css';
 
 const StatePage = props => {
+  console.log(props);
   const covidData = props.stateData;
   const [selectedState, setSelectedState] = useState(false);
   const [selectedStateData, setSelectedStateData] = useState();
@@ -23,8 +23,9 @@ const StatePage = props => {
       }
     }
   };
-
-  if (!selectedState) {
+  if (!covidData || !props) {
+    return <h2>Loading...</h2>;
+  } else if (!selectedState) {
     return (
       <div>
         <div className='dropdownContainer'>
