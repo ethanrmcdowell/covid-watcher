@@ -7,7 +7,12 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
-import { fetchData, fetchDataTwo, fetchDataThree } from './actions';
+import {
+  fetchData,
+  fetchDataTwo,
+  fetchDataThree,
+  fetchDataFour,
+} from './actions';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -20,6 +25,7 @@ async function getData() {
   store.dispatch(fetchData());
   store.dispatch(fetchDataTwo());
   store.dispatch(fetchDataThree());
+  store.dispatch(fetchDataFour());
 }
 
 getData().then(
