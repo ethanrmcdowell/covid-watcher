@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import Header from './components/Header';
 import FrontPageData from './components/FrontPageData';
 import StatePage from './components/StatePage';
+import VaccinationPage from './components/VaccinationPage';
+import AboutPage from './components/AboutPage';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import './style.css';
@@ -34,7 +36,10 @@ function App() {
             <StatePage stateData={stateData} />
           </Tab>
           <Tab eventKey='dailyVaccine' title='Vaccine'>
-            <h2>Daily vaccination numbers.</h2>
+            <VaccinationPage vaccineData={vaccineData} />
+          </Tab>
+          <Tab eventKey='info' title='Info'>
+            <AboutPage />
           </Tab>
         </Tabs>
       </div>
