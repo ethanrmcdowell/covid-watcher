@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Line } from 'react-chartjs-2';
 import { defaults } from 'react-chartjs-2';
 import './style.css';
@@ -7,7 +8,8 @@ const DynamicChart = props => {
   console.log(defaults.font.family);
   defaults.font.family = 'Times New Roman';
   const [chartData, setChartData] = useState({});
-  const covidData = props.deathData;
+  // const covidData = props.deathData;
+  const covidData = useSelector(state => state.data[1]);
   console.log(covidData);
 
   const deathsObj = covidData.timeline.deaths;
