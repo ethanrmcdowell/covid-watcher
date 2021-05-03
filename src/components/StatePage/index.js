@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import Dropdown from 'react-bootstrap/Dropdown';
 import StateDisplay from '../StateDisplay';
 import './style.css';
 
 const StatePage = props => {
   console.log(props);
-  // const covidData = props.stateData;
-  const covidData = useSelector(state => state.data[2]);
+  const covidData = props.stateData;
   const [selectedState, setSelectedState] = useState(false);
   const [selectedStateData, setSelectedStateData] = useState();
   let stateList = [];
